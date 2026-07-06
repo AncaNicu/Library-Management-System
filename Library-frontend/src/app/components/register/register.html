@@ -1,0 +1,37 @@
+<h1>Create a user account</h1>
+<form>
+    <div>
+        <label>Name </label>
+        <input 
+        type="text" 
+        name="name"
+        [(ngModel)]="registerRequest.name">
+    </div>
+    <br>
+    <div>
+        <label>Email </label>
+        <input
+        type="text"
+        name="email"
+        [(ngModel)]="registerRequest.email">
+    </div>
+    <br>
+    <div>
+        <label>Password </label>
+        <input
+        type="password"
+        name="password"
+        [(ngModel)]="registerRequest.password">
+    </div>
+    <br>
+    <div>
+        <label>Confirm password </label>
+        <input
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="registerRequest.confirmPassword">
+    </div>
+    <button 
+    type="button"
+    (click)="register()">Register</button>
+</form>

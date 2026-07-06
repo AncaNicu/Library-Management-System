@@ -1,0 +1,23 @@
+<nav>
+
+<a routerLink="/books"> Books </a>|
+
+@if(!isLoggedIn()) {
+    <a routerLink="/register"> Register </a>|
+
+    <a routerLink="/login"> Login </a>|
+}
+
+@if(isLoggedIn()){
+    <a routerLink="/borrowed-books"> My Borrowed Books ({{ borrowedCount$ | async }}) </a>|
+
+    <button (click) = "logout()"> Logout </button>
+}
+
+
+
+</nav>
+
+<hr>
+
+<router-outlet></router-outlet>

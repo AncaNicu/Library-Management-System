@@ -1,0 +1,31 @@
+<h1>The books you borrowed</h1>
+
+@if(borrowedBooks$ | async; as books)
+{
+
+  @if(books.length===0)
+  {
+    <p>No borrowed books.</p>
+  }
+
+  @else
+  {
+
+    @for(book of books; track book.borrowId)
+    {
+
+      <h2>Title: {{book.bookTitle}}</h2>
+
+      <h3>Author: {{book.bookAuthor}}</h3>
+
+      <h3>Borrow date: {{book.borrowDate}}</h3>
+
+      <button (click)="returnBook(book.borrowId, book.bookTitle)">Return book</button>
+
+      <hr>
+
+    }
+
+  }
+
+}

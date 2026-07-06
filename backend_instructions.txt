@@ -1,0 +1,98 @@
+1. Deschide Command Prompt
+2. cd Desktop -> cd QUEST ... pana se ajunge la folderul unde se construieste proiectul
+3. In Command Prompt scrie pe rand:
+
+dotnet new sln -n LibraryExercise -> creeaza solutia
+
+dotnet new webapi -n LibraryExercise.Api -> creeaza proiectul web api
+
+dotnet sln add LibraryExercise.Api -> adauga proiectul la solutie
+
+code . -> deschide VS Code
+
+4. Acum avem VS Code deschis ce contine LibraryExercise.Api si LibraryExercise.slnx
+5. Adauga pachetul cu dotnet add package Swashbuckle.AspNetCore in terminal
+6. Modifica Program.cs astfel:
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+app.Run();
+
+
+7. Scrie dotnet run in terminal => acum ar trebui sa mearga swagger-ul
+8. Creeaza foldere pt Controllers, Models, Services si Repositories
+9. Adauga pachetele necesare scriind in terminal:
+
+dotnet add package Microsoft.Data.SqlClient -> pt accesul la serverul SQL
+
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer -> pt autentificarea cu JWT
+
+dotnet add package BCrypt.Net-Next -> pt BCrypt la parole
+
+dotnet restore
+
+10. Adauga Connection string-ul la appsettings.json cu numele crt al bazei de date
+
+11. Pt un anumit obiect Obj se creeaza Obj in Models, ObjService, ObjController, IObjRepository si ObjRepository
+
+12. In Program.cs se adauga instructiunile cu AddScoped pt repository si service pt Obj
+
+13. Se ruleaza cu dotnet run si se pot vedea rezultatele in swagger
+
+14. Adauga partea aceea de CORS pt a permite comunicarea cu Angular (in Program.cs)
+
+
+=============================TESTAREA
+1. In terminalul deschis la proiectul de backend, se scrie cd.. pt a iesi din folderul crt si a intra in folderul parinte, cel care contine atat proiectul de backend, cat si fisierul slnx
+
+2. In terminal se scrie dotnet new xunit -n LibraryExercise.Api.Tests pt a crea folderul cu testele -> folderul se creeaza tot in folderul parinte
+
+3. Pt a adauga testele la solutie, se scrie dotnet sln add LibraryExercise.Api.Tests 
+
+4. Pt a referi proiectul API se scrie dotnet add LibraryExercise.Api.Tests reference LibraryExercise.Api
+
+5. Se deschide in VS Code folderul parinte
+
+6. In terminal se scrie cd LibraryExercise.Api.Tests, pt a ajunge in folderul de teste
+
+7. Se adauga pachetele necesare, sriind pe rand in terminal (probabil nu va fi nevoie de toate, la primul proiect nu cred ca a fost):
+dotnet add package Moq
+
+dotnet add package FluentAssertions
+
+dotnet add package Microsoft.AspNetCore.Mvc
+
+dotnet add package Microsoft.NET.Test.Sdk
+
+dotnet add package coverlet.collector
+
+8. In LibraryExercise.Api.Tests se creeaza folderele Controllers si Services, pt ca astea 2 vor fi testate
+
+9. Se creeaza fisierele de test. De ex, la servicii, creem in Services AuthServiceTests.cs pt testele legate de login si register
+
+10. Testarea se face deschizand terminalul in folderul parinte si ruland dotnet test (asa se ruleaza toate testele)
+
+Pt a rula doar anumite teste, se scrie dotnet test --filter AuthServiceTests
+
+Pt a rula doar un anumit test, se scrie dotnet test --filter Register_ShouldThrow_WhenEmailExists
+
+

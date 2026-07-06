@@ -1,0 +1,35 @@
+<h1>Browse the collection of books in our library</h1>
+
+@if(books$ | async; as books)
+{
+
+  @if(books.length===0)
+  {
+    <h2>No books in the library.</h2>
+  }
+
+  @else
+  {
+
+    @for(book of books; track book.id)
+    {
+
+      <h2>Title: {{book.title}}</h2>
+
+      <h3>Author: {{book.author}}</h3>
+
+      <p>Category: {{book.category}}</p>
+
+      <p>Available copies: {{book.noOfAvailableCopies}}</p>
+
+      <button (click)="viewDetails(book.id)">View details</button>
+
+      <button [disabled]="book.noOfAvailableCopies===0" (click)="borrowBook(book.id, book.title)">Borrow</button>
+
+      <hr>
+
+    }
+
+  }
+
+}

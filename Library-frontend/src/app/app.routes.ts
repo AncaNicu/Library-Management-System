@@ -1,0 +1,17 @@
+import { Routes } from '@angular/router';
+import { BookDetails } from './components/book-details/book-details';
+import { BooksList } from './components/books-list/books-list';
+import { BorrowedBooks } from './components/borrowed-books/borrowed-books';
+import { Login } from './components/login/login';
+import { Register } from './components/register/register';
+import { authGuard } from './guards/auth.guard';
+
+export const routes: Routes = [
+    { path: '', component: BooksList },
+    { path: 'books', component: BooksList },
+    { path: 'books/:id', component: BookDetails },
+    //accesibila doar utilizatorilor logati
+    { path: 'borrowed-books', component: BorrowedBooks, canActivate: [authGuard] },
+    { path: 'login', component: Login },
+    { path: 'register', component: Register }
+];

@@ -1,0 +1,158 @@
+1. Deschide Command Prompt si navigheaza cu cd pana ajungi in folderul unde se doreste folderul frontend
+
+2. Scrie ng new Nume folder unde sa fie FE
+
+3. Scrie CSS, N, None si asteapta sa se creeze FE
+
+4. Scrie cd Nume folder unde sa fie FE, apoi code . ca sa se deschida VS Code => gata, proiect creat si deschis in VS Code
+
+5. In terminal scrie ng serve ca sa verifici daca functioneaza (se deschide pagina Welcome pt Angular), apoi CTRL + C
+
+6. Navigheaza la src -> app -> app.html si inlocuieste continutul cu <router-outlet></router-outlet>
+
+7. Navigheaza la src -> app -> app.ts si inloc cu:
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  
+}
+
+8. In app creeaza folderele: services, models, components, guards, interceptors
+
+9. Pentru generarea componentelor, in terminal scrie: ng generate component components/nume-componenta pt toate componentele
+
+10. Creeaza modelele manual, cate un fisier ts pt fiecare model in parte
+
+11. Pentru generarea serviciilor, in terminal se scrie: ng generate service services/nume-serviciu pt fiecare serviciu
+
+12. Intra in src -> app -> app.config.ts si inlocuieste totul cu momentan fara interceptor):
+import { ApplicationConfig } from '@angular/core';
+
+import { provideRouter } from '@angular/router';
+
+import { provideHttpClient } from '@angular/common/http';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+
+  providers: [
+
+    provideRouter(routes),
+
+    provideHttpClient()
+
+  ]
+};
+
+13. Intra in src -> app -> app.routes.ts si modifica-l corespunzator (adauga componentele aplicatiei dezvoltate)
+
+14. Intra in src -> app -> app.ts si inlocuieste tot cu:
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector:'app-root',
+  imports:[RouterLink, RouterOutlet],
+  templateUrl:'./app.html',
+  styleUrl:'./app.css'
+
+})
+
+export class App{
+
+}
+
+Fara astea, nu va merge testul de navbar de mai departe
+
+15. Inlocuieste tot ce e in app.html cu ceva de genul pentru a testa functionarea paginilor:
+<nav>
+
+<a routerLink="/books"> Books </a>|
+
+<a routerLink="/register"> Register </a>|
+
+<a routerLink="/login"> Login </a>
+
+</nav>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+16. Creeaza modelele, avand ca model Models si DTOs din BE
+
+17. Implementeaza serviciile si controllerele
+
+18. Creeaza auth.interceptor.ts. Pentru a-l putea folosi, deschide src -> app -> app.config.ts si scrie:
+import { ApplicationConfig } from '@angular/core';
+
+import { provideRouter } from '@angular/router';
+
+//permite apelarea BE si inregistrarea interceptorului
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+
+//adauga interceptor-ul
+import { authInterceptor } from './interceptors/auth.interceptor';
+
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+
+  providers: [
+
+    provideRouter(routes),
+
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
+
+  ]
+};
+
+19. Adaugarea GUARDS se face prin crearea lui auth.guards.ts in guards cu:
+import { CanActivateFn } from '@angular/router';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
+
+export const authGuard:
+CanActivateFn =
+() =>
+{
+ const router = inject(Router);
+
+ const token = localStorage.getItem('token');
+
+ if(token)
+ {
+   return true;
+ }
+
+ router.navigate(['/login']);
+
+ return false;
+};
+
+20. Pt a adauga garda, se pun in app.routes.ts astfel, paginile care pot fi accesate doar de utilizatorii logati:
+{
+ path:'borrowed-books',
+
+ component:BorrowedBooks,
+
+ canActivate:
+ [
+   authGuard
+ ]
+}
+
+
+
