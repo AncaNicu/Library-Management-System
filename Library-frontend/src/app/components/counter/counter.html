@@ -1,0 +1,24 @@
+<h2>COUNTER PAGE WITH SIGNALS</h2>
+
+@if (authService.crtUserName() !== null) 
+{
+  <p>User name: {{ authService.crtUserName() }}</p>
+} 
+@else 
+{
+  <p>User: Unknown</p>
+}
+
+<p>
+
+Current Counter:
+
+{{ counterService.counter() }}
+
+</p>
+
+<button (click)="increment()">
+
+Increment
+
+</button>

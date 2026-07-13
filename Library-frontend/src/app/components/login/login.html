@@ -3,10 +3,14 @@
     <div>
         <label>Email </label>
         <input
-        type="text"
+        type="email"
         name="email"
-        [(ngModel)]="loginRequest.email">
+        [(ngModel)]="loginRequest.email"
+        #email="ngModel"
+        maxlength="4"
+        required>
     </div>
+    
     <br>
     <div>
         <label>Password </label>

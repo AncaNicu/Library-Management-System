@@ -1,0 +1,19 @@
+<nav>
+NAVBAR WITH SIGNALS: 
+
+Counter in Navbar:
+
+{{ counterService.counter() }}
+
+@if (authService.crtUserName() !== null) 
+{
+  <p>User name: {{ authService.crtUserName() }}</p>
+} 
+@else 
+{
+  <p>User: Unknown</p>
+}
+
+</nav>
+
+<hr>

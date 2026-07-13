@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { LoginRequest } from '../../models/login-request';
 import { Auth } from '../../services/auth';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
-
+  
   loginRequest: LoginRequest =
   {
     email: '',

@@ -68,3 +68,4 @@ C:\Users\Profesor\Desktop\QUEST\Library Management System\Project\LibraryExercis
 C:\Users\Profesor\Desktop\QUEST\Library Management System\Project\LibraryExercise.Api\obj\Debug\net10.0\LibraryExercise.Api.pdb
 C:\Users\Profesor\Desktop\QUEST\Library Management System\Project\LibraryExercise.Api\obj\Debug\net10.0\LibraryExercise.Api.genruntimeconfig.cache
 C:\Users\Profesor\Desktop\QUEST\Library Management System\Project\LibraryExercise.Api\obj\Debug\net10.0\ref\LibraryExercise.Api.dll
+C:\Users\Profesor\Desktop\QUEST\Library Management System\Project\LibraryExercise.Api\obj\Debug\net10.0\LibraryExercise.Api.sourcelink.json

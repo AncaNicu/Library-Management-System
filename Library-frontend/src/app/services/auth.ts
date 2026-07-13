@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterRequest } from '../models/register-request';
 import { Observable } from 'rxjs';
@@ -12,6 +12,8 @@ import { RegisterResponse } from '../models/register-response';
 export class Auth {
 
   private baseUrl = 'http://localhost:5041/api';
+
+  crtUserName = signal(localStorage.getItem('name') || null);
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +32,8 @@ export class Auth {
     localStorage.setItem('token', loginResponse.token);
     localStorage.setItem('userId', loginResponse.userId.toString());
     localStorage.setItem('name', loginResponse.name);  
+
+    this.crtUserName.set(loginResponse.name);
   }
 
   logout()
@@ -37,6 +41,8 @@ export class Auth {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('name');
+
+    this.crtUserName.set(null);
   }
 
   isLoggedIn(): boolean

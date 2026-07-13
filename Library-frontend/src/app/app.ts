@@ -6,10 +6,12 @@ import { Auth } from './services/auth'
 import { Borrow } from './services/borrow';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { Navbar } from './components/navbar/navbar';
+import { NavbarBehavior } from './components/navbar-behavior/navbar-behavior';
 
 @Component({
   selector:'app-root',
-  imports:[RouterLink, RouterOutlet, AsyncPipe],
+  imports:[RouterLink, RouterOutlet, AsyncPipe, Navbar, NavbarBehavior],
   templateUrl:'./app.html',
   styleUrl:'./app.css'
 
