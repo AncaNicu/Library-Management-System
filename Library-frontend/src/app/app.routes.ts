@@ -7,6 +7,7 @@ import { Register } from './components/register/register';
 import { authGuard } from './guards/auth.guard';
 import { Counter } from './components/counter/counter';
 import { CounterBehavior } from './components/counter-behavior/counter-behavior';
+import { AgeValidatorComponent } from './components/age-validator.component/age-validator.component';
 
 export const routes: Routes = [
     { path: '', component: BooksList },
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'login', component: Login },
     { path: 'register', component: Register },
     { path: 'counter', component: Counter },
-    { path: 'counter-behavior', component: CounterBehavior }
+    { path: 'counter-behavior', component: CounterBehavior },
+    { path: 'age-validator', component: AgeValidatorComponent }
 ];

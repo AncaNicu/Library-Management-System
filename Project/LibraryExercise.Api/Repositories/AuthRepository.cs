@@ -35,8 +35,10 @@ namespace LibraryExercise.Api.Repositories
 
         public async Task CreateUser(string name, string email, string hashedPassword)
         {
+            //using -> cand metoda se termina, se inchide conexiunea la baza de date
             using SqlConnection connection = _factory.CreateConnection();
 
+            //deschiderea efectiva a conexiunii cu bd
             await connection.OpenAsync();
 
             var query = @"
@@ -45,6 +47,8 @@ namespace LibraryExercise.Api.Repositories
                 VALUES
                 (@Name, @Email, @Password)";
 
+            //crearea unui obiect SqlCommand care contine query-ul si conexiunea la baza de date
+            //comanda nu se executa imediat, pt ca inca nu am adaugat parametrii ("@Name", "@Email", "@Password")
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@Name", name);
@@ -75,8 +79,8 @@ namespace LibraryExercise.Api.Repositories
             {
                 return new User
                 {
-                    Id = reader.GetInt32(0),
-                    HashedPassword = reader.GetString(1),
+                    Id = reader.GetInt32(0),//user_id -> 0 in query
+                    HashedPassword = reader.GetString(1),//user_password -> 1 in query
                     Name = reader.GetString(2),
                     Email = email
                 };

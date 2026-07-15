@@ -1,0 +1,47 @@
+<h2>Person Form</h2>
+
+<form
+    [formGroup]="ageForm"
+    (ngSubmit)="submit()">
+
+    <label>Name</label>
+
+    <br>
+
+    <input
+        type="text"
+        formControlName="name">
+
+    @if(name?.hasError('required') && name?.touched)
+    {
+        <p>Name is required.</p>
+    }
+
+    @if(name?.hasError('pattern') && name?.touched)
+    {
+        <p>Name can contain only letters.</p>
+    }
+
+    <br><br>
+
+    <label>Age</label>
+
+    <br>
+
+    <input
+        type="number"
+        formControlName="age">
+
+    <p>{{ ageMessage }}</p>
+
+    <br><br>
+
+    <button
+        type="submit"
+        [disabled]="ageForm.invalid">
+
+        Submit
+
+    </button>
+
+</form>
